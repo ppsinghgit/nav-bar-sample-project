@@ -1,0 +1,711 @@
+<div class="row-layout group" style="margin-bottom: 10px;">
+  <div [igxToggleAction]="navigationDrawerMain" class="row-layout group_1">
+    <igx-icon class="icon"> menu </igx-icon>
+  </div>
+  <igx-navbar class="navbar" style="margin:0; padding:0;">
+    <igx-navbar-title class="navbar-content">
+      <img
+        src="/assets/images/MARSLogo.png"
+        style="width:112px; height:46px;"
+      />
+    </igx-navbar-title>
+    <button
+      igxButton="icon"
+      igxRipple
+      [igxToggleAction]="dropdown"
+      class="button"
+    >
+      <igx-icon> settings </igx-icon>
+    </button>
+    <button igxButton="icon" igxRipple class="button">
+      <igx-icon> notifications_none </igx-icon>
+    </button>
+    <igx-drop-down #dropdown class="dropdown">
+      <igx-drop-down-item [igxToggleAction]="dialogUserProfile">
+        User Profile
+      </igx-drop-down-item>
+      <igx-drop-down-item [igxToggleAction]="dialogChangePassword">
+        Change Password
+      </igx-drop-down-item>
+      <igx-drop-down-item> Log Out </igx-drop-down-item>
+    </igx-drop-down>
+  </igx-navbar>
+  <div [igxToggleAction]="navigationDrawerMain" class="row-layout group_2">
+    <p class="ig-typography__subtitle-2 text">Jack Smith</p>
+  </div>
+</div>
+<span>Content Here</span>
+<div class="row-layout group_3">
+  <div>
+    <igx-nav-drawer
+      id="navigationDrawerMain"
+      [isOpen]="false"
+      [pinThreshold]="0"
+      #navigationDrawerMain
+      class="navigation-drawer-main"
+    >
+      <ng-template igxDrawer>
+        <igx-list class="list">
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> dashboard </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle (click)="gotoDashboard()">Dashboard</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> store </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Stores</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> description </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Enrollments</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> gavel </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Compliance</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> shopping_basket </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>eOrder</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> payment </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Payment</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> bar_chart </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Reports</span>
+          </igx-list-item>
+          <igx-list-item [isHeader]="false">
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> help </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Help &amp; Support</span>
+          </igx-list-item>
+          <igx-list-item
+            [isHeader]="false"
+            (click)="navDrawerVisible = !navDrawerVisible"
+          >
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> build </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Admin</span>
+            <span igxListAction>
+              <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+            </span>
+          </igx-list-item>
+          <igx-list-item
+            [isHeader]="false"
+            (click)="Client_Admin = !Client_Admin"
+          >
+            <span igxListThumbnail>
+              <igx-avatar shape="circle" class="avatar">
+                <igx-icon> build </igx-icon>
+              </igx-avatar>
+            </span>
+            <span igxListLineTitle>Client Admin</span>
+            <span igxListAction>
+              <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+            </span>
+          </igx-list-item>
+        </igx-list>
+        <div class="row-layout row-layout_1"></div>
+        <div class="row-layout row-layout-msa-logo-1">
+          <img src="/assets/images/MSAHeaderIcon.jpg" class="image_1" />
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="navDrawerVisible"
+      #navigationDrawerAdmin
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>ADMIN</span>
+        </div>
+        <div igxDrawerItem igxRipple (click)="navDrawerUser = !navDrawerUser">
+          <igx-icon class="icon_1"> person </igx-icon>
+          <span style="margin-right: 83px;">User</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="Enrollment = !Enrollment">
+          <igx-icon class="icon_1"> description </igx-icon>
+          <span style="margin-right: 43px;">Enrollment</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="System = !System">
+          <igx-icon
+            family="imx-icons"
+            name="file-tree"
+            class="icon_1"
+          ></igx-icon>
+          <span style="margin-right: 68px;">System</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="Mobile = !Mobile">
+          <igx-icon class="icon_1"> phone_iphone </igx-icon>
+          <span style="margin-right: 70px;">Mobile</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="Messages = !Messages">
+          <igx-icon class="icon_1"> all_inbox </igx-icon>
+          <span style="margin-right: 52px;">Messages</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerAdmin"
+          (click)="toggleChildNavDrawer(0)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="navDrawerUser"
+      #navigationDrawerAdminUser
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>USER</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> manage_accounts </igx-icon>
+          <span>User Maintenance</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> group_add </igx-icon>
+          <span>Users &amp; Stores Upload</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> upload </igx-icon>
+          <span>Upload Status</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> how_to_reg </igx-icon>
+          <span>Stores List Transfer</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> how_to_reg </igx-icon>
+          <span>Registration Approval</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> groups </igx-icon>
+          <span>Group Maintenance</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerAdminUser"
+          (click)="toggleChildNavDrawer(1)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="Enrollment"
+      #navigationDrawerAdminEnrollment
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>ENROLLMENT</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> inventory </igx-icon>
+          <span>Package Tracking</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> local_shipping </igx-icon>
+          <span>Distributor Restriction</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> picture_as_pdf </igx-icon>
+          <span>PDF Generation</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon
+            family="imx-icons"
+            name="file-changes"
+            class="icon_1"
+          ></igx-icon>
+          <span>Enrollment Ownership Change</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerAdminEnrollment"
+          (click)="toggleChildNavDrawer(2)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="System"
+      #navigationDrawerAdminSystem
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>SYSTEM</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon
+            family="imx-icons"
+            name="security"
+            class="icon_1"
+          ></igx-icon>
+          <span>Role Maintenance</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> check_box_outline_blank </igx-icon>
+          <span>Template Maintenance</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon family="imx-icons" name="ungroup" class="icon_1"></igx-icon>
+          <span>Template Group Maintenance</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon
+            family="imx-icons"
+            name="stackoverflow"
+            class="icon_1"
+          ></igx-icon>
+          <span>Multi Program Enrollments</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> app_registration </igx-icon>
+          <span>App Client Settings</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerAdminSystem"
+          (click)="toggleChildNavDrawer(3)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="Mobile"
+      #navigationDrawerAdminMobile
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>MOBILE</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> loyalty </igx-icon>
+          <span>Trade Program</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerAdminMobile"
+          (click)="toggleChildNavDrawer(4)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="Messages"
+      #navigationDrawerAdminMessages
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>MESSAGES</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> inbox </igx-icon>
+          <span>Maintain Messages</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerAdminMessages"
+          (click)="toggleChildNavDrawer(5)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="Client_Admin"
+      #navigationDrawerClientAdmin
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>CLIENT ADMIN</span>
+        </div>
+        <div igxDrawerItem igxRipple (click)="User = !User">
+          <igx-icon class="icon_1"> person </igx-icon>
+          <span style="margin-right: 76px;">User</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="UserEnrollment = !UserEnrollment">
+          <igx-icon class="icon_1"> description </igx-icon>
+          <span style="margin-right: 36px;">Enrollment</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="UserSystem = !UserSystem">
+          <igx-icon
+            family="imx-icons"
+            name="file-tree"
+            class="icon_1"
+          ></igx-icon>
+          <span style="margin-right: 61px;">System</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div igxDrawerItem igxRipple (click)="userMobile = !userMobile">
+          <igx-icon class="icon_1"> phone_iphone </igx-icon>
+          <span style="margin-right: 62px;"> Mobile</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          (click)="EnrollmentDetails = !EnrollmentDetails"
+        >
+          <igx-icon class="icon_1"> phone_iphone </igx-icon>
+          <span style="margin-right: 56px;"> Reports</span>
+          <igx-icon class="icon_1"> arrow_forward_ios </igx-icon>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerClientAdmin"
+          (click)="toggleChildNavDrawer(6)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="User"
+      #navigationDrawerClientAdminUser
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>USER</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> how_to_reg </igx-icon>
+          <span>Registration Approval</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerClientAdminUser"
+          (click)="toggleChildNavDrawer(7)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="UserEnrollment"
+      #navigationDrawerClientAdminEnrollment
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>ENROLLMENT</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon
+            family="imx-icons"
+            name="file-changes"
+            class="icon_1"
+          ></igx-icon>
+          <span>Enrollment Ownership Change</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerClientAdminEnrollment"
+          (click)="toggleChildNavDrawer(8)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="UserSystem"
+      #navigationDrawerClientAdminSystem
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>SYSTEM</span>
+        </div>
+        <div igxDrawerItem igxRipple>
+          <igx-icon class="icon_1"> app_registration </igx-icon>
+          <span>App Client Settings</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerClientAdminSystem"
+          (click)="toggleChildNavDrawer(9)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="userMobile"
+      #navigationDrawerClientAdminMobile
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>MOBILE</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerClientAdminMobile"
+          (click)="toggleChildNavDrawer(10)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+    <igx-nav-drawer
+      [isOpen]="true"
+      [pinThreshold]="0"
+      *ngIf="EnrollmentDetails"
+      #navigationDrawerClientAdminMobile
+      class="navigation-drawer-main"
+      (closed)="onClosed()"
+    >
+      <ng-template igxDrawer>
+        <div [isHeader]="true" igxDrawerItem igxRipple>
+          <span>ENROLLMENT DETAILS</span>
+        </div>
+        <div
+          igxDrawerItem
+          igxRipple
+          [igxToggleAction]="navigationDrawerClientAdminMobile"
+          (click)="toggleChildNavDrawer(11)"
+        >
+          <igx-icon class="icon_2"> arrow_back </igx-icon>
+        </div>
+      </ng-template>
+    </igx-nav-drawer>
+  </div>
+</div>
+<igx-dialog
+  [closeOnOutsideSelect]="true"
+  [closeOnEscape]="true"
+  #dialogUserProfile
+>
+  <ng-container>
+    <div class="column-layout group_4">
+      <div class="column-layout group_5">
+        <div class="column-layout group_6">
+          <h3 class="h3">User Profile</h3>
+          <div class="row-layout group_7">
+            <div class="column-layout group_8">
+              <igx-input-group type="box" class="input">
+                <input type="text" igxInput />
+                <label igxLabel>First Name</label>
+              </igx-input-group>
+              <igx-input-group type="box" class="input">
+                <input type="text" igxInput />
+                <label igxLabel>Last Name</label>
+              </igx-input-group>
+            </div>
+            <div class="column-layout group_8">
+              <igx-input-group type="box" class="input">
+                <input type="text" [disabled]="true" igxInput />
+                <label igxLabel>Login (Email Address)</label>
+              </igx-input-group>
+              <igx-input-group type="box" class="input">
+                <input type="tel" igxInput />
+                <label igxLabel>Phone</label>
+              </igx-input-group>
+            </div>
+          </div>
+        </div>
+        <div class="row-layout group_9">
+          <div class="column-layout group_8">
+            <igx-input-group type="box" class="input">
+              <input type="text" igxInput />
+              <label igxLabel>Address</label>
+            </igx-input-group>
+            <div class="row-layout group_10">
+              <igx-input-group type="box" class="user-input">
+                <input type="text" igxInput />
+                <label igxLabel>City</label>
+              </igx-input-group>
+              <igx-select type="box" [(ngModel)]="value" class="user-input">
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <label igxLabel>State / Province</label>
+              </igx-select>
+            </div>
+            <div class="row-layout group_10">
+              <igx-input-group type="box" class="user-input">
+                <input type="text" igxInput />
+                <label igxLabel>Zip / Postal Code</label>
+              </igx-input-group>
+              <igx-select type="box" [(ngModel)]="value" class="user-input">
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <igx-select-item value="2"> Country 1 </igx-select-item>
+                <label igxLabel>Country</label>
+              </igx-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <igx-dialog-actions>
+    <button
+      igxButton="raised"
+      igxRipple
+      [igxToggleAction]="dialogUserProfile"
+      class="button_1"
+    >
+      SAVE
+    </button>
+    <button
+      igxButton="raised"
+      igxRipple
+      [igxToggleAction]="dialogUserProfile"
+      class="button_2"
+    >
+      CANCEL
+    </button>
+  </igx-dialog-actions>
+</igx-dialog>
+<igx-dialog
+  [closeOnOutsideSelect]="true"
+  [closeOnEscape]="true"
+  #dialogChangePassword
+>
+  <ng-container>
+    <div class="column-layout group_4">
+      <div class="column-layout group_5">
+        <div class="column-layout group_6">
+          <h3 class="h3_1">Change Password</h3>
+        </div>
+        <div class="row-layout group_9">
+          <div class="column-layout group_8">
+            <igx-input-group type="box" class="input">
+              <input type="password" [required]="true" igxInput />
+              <label igxLabel>Current Password</label>
+            </igx-input-group>
+            <igx-input-group type="box" class="input">
+              <input type="password" [required]="true" igxInput />
+              <label igxLabel>New Password</label>
+            </igx-input-group>
+            <igx-input-group type="box" class="input">
+              <input type="password" [required]="true" igxInput />
+              <label igxLabel>Confirm New Password</label>
+            </igx-input-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <igx-dialog-actions>
+    <button
+      igxButton="raised"
+      igxRipple
+      [igxToggleAction]="dialogChangePassword"
+      class="button_1"
+    >
+      SAVE
+    </button>
+    <button
+      igxButton="raised"
+      igxRipple
+      [igxToggleAction]="dialogChangePassword"
+      class="button_2"
+    >
+      CANCEL
+    </button>
+  </igx-dialog-actions>
+</igx-dialog>
